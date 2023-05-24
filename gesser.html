@@ -1,0 +1,20 @@
+
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <title>Gesser</title>
+    </head>
+
+    <body>
+
+        <div>request?!<br><span id="killmeplease"></span></div>
+        
+        <script>
+            const bobby = sessionStorage.getItem('req');
+            let dolly = bobby;
+            let kmp = bobby.split(', ');
+
+            document.getElementById('killmeplease').textContent = kmp[1];
+        </script>
+    </body>
+</html>
