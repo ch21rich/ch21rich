@@ -110,7 +110,8 @@
       <script>
         const form = document.getElementById('form');
         const requesting = document.getElementById('request');
-
+        const score = 0;
+        const total = 0;
 
         form.addEventListener('submit', function (e) {
           e.preventDefault();
@@ -118,6 +119,8 @@
           const requestWords = requesting.value;
 
           sessionStorage.setItem('req', requestWords);
+          sessionStorage.setItem('total', total);
+          sessionStorage.setItem('score', score);
 
           window.location.href = "gesser.html";
         })
