@@ -1,148 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
-<style>
-  @font-face {
-    font-family: boppin;
-    src: url("/Poppins-Bold.ttf");
-    font-weight: normal;
-    font-style: bold;
-  }
+<head>
+  <title>Guess The Merny!</title>
+  <style>
+    @font-face {
+      font-family: boppin;
+      src: url("/Poppins-Regular.ttf");
+      font-weight: normal;
+      font-style: normal;
+    }
 
-  @font-face {
-    font-family: boppin;
-    src: url("/Poppins-Regular.ttf");
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: f;
-    src: url("/Poppins-Light.ttf");
-  }
+    div {
+      font-family: boppin;
+    }
 
 
-  div {
-    font-family: boppin;
-  }
+    .imageContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+    }
 
-  .centertext {
-    font-size: x-large;
-    color: #fa9c21;
-    font-family: "boppin";
-    position: absolute;
-    left: 37.5%;
-    top: 15%;
-    text-align: center;
-  }
+    .imageContainer img {
+      max-width: 600px;
+      /* Adjust the maximum width as needed */
+      max-height: 400px;
+      /* Adjust the maximum height as needed */
+      margin-top: 75px;
+      /* Adjust the distance from the top as needed */
+    }
 
-  input[type="text"] {
-    font-family: "boppin";
-    position: absolute;
-    left: 25%;
-    top: 60%;
-    width: 30%;
-    padding: 12px 15px;
-    border: 4px solid rgb(96, 70, 32);
-    border-radius: 4px;
-  }
+    input[type="text"] {
+      font-family: "boppin";
+      position: absolute;
+      left: 15%;
+      top: 90%;
+      width: 30%;
+      padding: 12px 15px;
+      border: 4px solid rgb(96, 70, 32);
+      border-radius: 4px;
+    }
 
-  input[type=text]:focus {
-    border: 4px solid #555;
-  }
+    input[type=text]:focus {
+      border: 4px solid #555;
+    }
 
-  button[type=submit] {
-    font-family: "boppin";
-    position: absolute;
-    left: 60%;
-    top: 60%;
-    width: 10%;
-    padding: 16px 19px;
-    background-color: rgb(256, 236, 156);
-    border-radius: 4px;
-    border: none;
-  }
+    #submitButton {
+      font-family: "boppin";
+      position: absolute;
+      left: 50%;
+      top: 90%;
+      width: 10%;
+      padding: 16px 19px;
+      background-color: rgb(256, 236, 156);
+      border-radius: 4px;
+      border: none;
+    }
 
-  button[type=submit]:focus {
-    background-color: rgb(233, 188, 9);
-  }
+    #submitButton:focus {
+      color: rgb(181, 105, 14);
+    }
 
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-    width: 1000px;
-    margin: 600px auto 0;
-  }
+    .cock {
+      display: flex;
+      justify-content: space-between;
+      width: 1000px;
+      margin: 20px auto 0;
+    }
 
-  .sped {
-    font-family: "boppin";
-    padding: 16px;
-    background-color: rgb(256, 236, 156);
-    font-size: larger;
-    border-radius: 4px;
-    border: none;
-    color: rgb(181, 105, 14);
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    display: inline-block;
-    width: 200px;
-  }
-</style>
+    .kmp {
+      font-family: "boppin";
+      width: 250px;
+      padding: 30px;
+      background-color: rgb(256, 236, 156);
+      color: rgb(181, 105, 14);
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+      margin: 0 10px;
+      white-space: normal;
+      word-wrap: break-word;
+      border-radius: 8px;
+    }
 
-<header>
-  <meta charset="UTF-8">
-  <title>gessing page</title>
-  </head>
+    .kmp:hover {
+      background-color: rgb(236, 216, 136);
+    }
 
-  <body>
-    <div class="centertext">
-      <h1 font-style: bold;>Guesser</h1><br>
-      <h2 font-weight: normal;>Welcome to Guessing!</h2>
-    </div>
+    .heading {
+      text-align: center;
+      font-family: "boppin";
+      font-size-adjust: 150%;
+      color: rgb(219, 136, 36);
+    }
 
-    <div class="submitting">
-      <form id="form">
-        <input id="request" type="text">
-        <button type="submit">Submit</button>
-      </form>
+    .scoreing {
+      font-family: "boppin";
+      position: absolute;
+      top: 630px;
+      left: 1000px;
+      font-size: 40px;
+      color: rgb(231, 199, 42);
+    }
+  </style>
 
-      <script>
-        const form = document.getElementById('form');
-        const requesting = document.getElementById('request');
-        const score = 0;
-        const total = 0;
+</head>
 
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
 
-          const requestWords = requesting.value;
+<body>
+  <h1 class="heading">Guess The Merny!</h1>
+  <p class="scoreing">Streak: <span id="counterValue">0</span></p>
 
-          sessionStorage.setItem('req', requestWords);
-          sessionStorage.setItem('total', total);
-          sessionStorage.setItem('score', score);
+  <div class="cock">
+    <button class="kmp" id="1"></button>
+    <button class="kmp" id="2"></button>
+    <button class="kmp" id="3"></button>
+  </div>
 
-          window.location.href = "gesser.html";
-        })
-      </script>
-    </div>
+  <div class="imageContainer">
+    <img id="randomImage" src="#" alt="Random Image">
+  </div>
 
-    <div class="choices">
-      <div class="button-container">
-        <button class="button sped" onclick="fillTextBox('sad cat, happy cat, angry cat, depressed cat')">Cats</button>
-        <button class="button sped" onclick="fillTextBox('old dog, young dog, evil dog, nice dog')">Dogs</button>
-        <button class="button sped" onclick="fillTextBox('baboon, orangutans, mandrills, avis')">Monkeys</button>
-        <button class="button sped" onclick="fillTextBox('squares, triangles, circles, ellipses')">Shapes</button>
-      </div>
+  <input type="text" id="myTextBox">
+  <button id="submitButton">Submit</button>
 
-      <script>
-        function fillTextBox(text) {
-          var textBox = document.getElementById("request");
-          textBox.value = text;
-        }
-      </script>
-    </div>
 
-  </body>
+  <script src="yay.js">
+
+
+  </script>
+</body>
 
 </html>
