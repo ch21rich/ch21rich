@@ -1,0 +1,150 @@
+<html lang="en">
+
+<style>
+    @font-face {
+        font-family: boppin;
+        src: url("/Poppins-Bold.ttf");
+        font-weight: normal;
+        font-style: bold;
+    }
+
+    @font-face {
+        font-family: boppin;
+        src: url("/Poppins-Regular.ttf");
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: f;
+        src: url("/Poppins-Light.ttf");
+    }
+
+    .choices {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 600px;
+    }
+
+    .sped {
+        font-family: "boppin";
+        width: 250px;
+        padding: 30px;
+        background-color: rgb(256, 236, 156);
+        color: rgb(181, 105, 14);
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        margin: 0 10px;
+        white-space: normal;
+        word-wrap: break-word;
+        border-radius: 8px;
+    }
+
+    .sped:hover {
+        background-color: rgb(236, 216, 136);
+    }
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <title>Gesser</title>
+</head>
+
+<body>
+
+    <div class="img">
+        <img id="setImagee" src="" alt="Image">
+    </div>
+
+    <div class="choices">
+        <button class="button sped" id="0"></button>
+        <button class="button sped" id="1"></button>
+        <button class="button sped" id="2"></button>
+        <button class="button sped" id="3"></button>
+    </div>
+
+
+</body>
+
+<script>
+    const bobby = sessionStorage.getItem('req');
+    let dolly = bobby;
+    let kmp = bobby.split(', ');
+
+    let current = Math.floor(Math.random() * 5);
+
+
+    var apiKey = 'AIzaSyByK98YTNco9OgrRdoV2p-FaxFFw9FUJXI'; // Replace with your Google Custom Search API key
+    var cx = '51675fc53878240ab'; // Replace with your Custom Search Engine (CX) ID
+    var imageTypes = kmp; // Replace with your array of image types
+    var imageLinks = [[], [], [], []]; // Four arrays to store the image links for each type
+
+    for (var i = 0; i < kmp.length; i++) {
+        var idee = i;
+        var button = document.getElementById(idee);
+        if (button) {
+            button.textContent = kmp[i];
+        }
+    }
+
+    fetchImageLinks(0);
+
+    function iterateNext(number) {
+
+
+        current = Math.floor(Math.random() * 5);
+
+        let dbobby = imageLinks[imageLinks[current].length()-1];
+        document.getElementById("setImagee").src = dbobby;
+
+        if(imageLinks[current].length() == 1){
+            fetchImageLinks(1);
+        }
+
+    }
+
+    function fetchImageLinks(index) {
+        if (index >= imageTypes.length) {
+            // All image types have been processed
+            console.log('Image links:', imageLinks);
+            return;
+        }
+
+        var searchQuery = imageTypes[index];
+        var url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&searchType=image&q=${encodeURIComponent(searchQuery)}`;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                var items = response.items;
+                if (items && items.length > 0) {
+                    for (var i = 0; i < items.length; i++) {
+                        var imageUrl = items[i].link;
+                        imageLinks[index].push(imageUrl);
+                    }
+                }
+            }
+
+            // Fetch image links for the next image type
+            fetchImageLinks(index + 1);
+        };
+
+        xhr.send();
+    }
+
+    iterateNext(current);
+
+
+    // Start fetching image links for each type
+
+</script>
+
+</html>
