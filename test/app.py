@@ -3,7 +3,7 @@ import requests
 app = Flask(__name__)
 
 @app.route('/')
-def index():
+def gesser():
     # Get the image URL from Python code
     image_url = fetch_random_images("Korean", 1)
 
